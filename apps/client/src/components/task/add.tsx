@@ -1,7 +1,11 @@
 import type React from "react";
 import { useState } from "react";
-import type { APIClass } from "../../api";
-import type { SetDataType } from "../../types/task";
+import type { APIClass } from "@/api";
+import type { SetDataType } from "@/types/task";
+import { Button } from "../ui/button";
+import { Input } from "../ui/input";
+import { Field, FieldDescription, FieldLabel } from "../ui/field";
+import { ButtonGroup } from "../ui/button-group";
 
 interface IAddTaskForm {
   setData: SetDataType;
@@ -21,16 +25,23 @@ export const AddTasks = ({ setData, api }: IAddTaskForm) => {
   };
 
   return (
-    <form className="add-task" onSubmit={handleSubmit}>
-      <label htmlFor="task">Add a task</label>
-      <input
-        type="text"
-        name="task"
-        value={title}
-        placeholder="Add a task"
-        onChange={(e) => setTitle(e.target.value)}
-      />
-      <button type="submit">Add</button>
+    <form onSubmit={handleSubmit}>
+      <Field>
+        <FieldLabel htmlFor="task">Create a task</FieldLabel>
+        <ButtonGroup>
+          <Input
+            id="task"
+            type="text"
+            value={title}
+            placeholder="Add a task"
+            onChange={(e) => setTitle(e.target.value)}
+          />
+          <Button typeof="submit" variant="default">
+            Add
+          </Button>
+        </ButtonGroup>
+        <FieldDescription>Enter task title</FieldDescription>
+      </Field>
     </form>
   );
 };
