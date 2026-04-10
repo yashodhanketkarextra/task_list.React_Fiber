@@ -10,8 +10,11 @@
   background-color: var(--color-secondary);
   color: var(--color-secondary-text);
   padding: 1rem;
-  font-size: 1.5rem;
-  font-weight: bold;
+  font-size: 0.85rem;
+  text-align: center;
+  display: inline-flex;
+  gap: 0.25rem;
+  justify-content: space-between;
 }
 
 #main {
@@ -32,57 +35,45 @@
 
 .task {
   display: flex;
-  flex-direction: row;
-  align-items: center;
-  justify-content: space-between;
-  font-size: 1.2rem;
-  gap: 0.25rem;
+  flex-direction: column;
+  gap: 0.5rem;
   padding: 0.75rem;
   border-radius: 0.25rem;
+}
 
-  button {
-    margin-left: auto;
-    font-size: 1rem;
-    padding: 0.25rem;
+.task-display {
+  p {
+    font-size: 1.2rem;
   }
 
+  span {
+    font-size: 0.85rem;
+    font-style: italic;
+  }
 }
 
-.task.completed {
-  background-color: var(--color-accent-completed);
+.task-control {
+  display: inline-flex;
+  justify-content: center;
+  gap: 0.5rem;
+  margin-right: auto;
+
+  button {
+    font-size: 1rem;
+    padding: 0.25rem;
+    width: 20ch;
+  }
 }
 
-.task.pending {
-  background-color: var(--color-accent-pending);
-}
+.task {
+  &.completed {
+    background-color: var(--color-accent-completed);
+  }
 
-/* .add-task { */
-/*   display: flex; */
-/*   flex-direction: column; */
-/*   gap: 0.5rem; */
-/*   margin: 1rem 0; */
-/**/
-/*   label { */
-/*     font-size: 1.5rem; */
-/*     font-weight: bold; */
-/*   } */
-/* } */
-/**/
-/* .task-form-core { */
-/*   display: grid; */
-/*   width: 100%; */
-/**/
-/*   grid-template-columns: 8fr 1fr; */
-/*   gap: 0.5rem; */
-/**/
-/*   input, */
-/*   button { */
-/*     font-size: 1rem; */
-/*     padding: 0.5rem; */
-/*     border: 0.1rem solid var(--color-secondary); */
-/*     border-radius: 0.25rem; */
-/*   } */
-/* } */
+  &.pending {
+    background-color: var(--color-accent-pending);
+  }
+}
 
 .add-task {
   display: grid;

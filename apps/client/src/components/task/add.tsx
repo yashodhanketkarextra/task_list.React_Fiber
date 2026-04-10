@@ -1,21 +1,23 @@
 import type React from "react";
 import { useState } from "react";
-import type { APIClass } from "../api";
+import type { APIClass } from "../../api";
+import type { SetDataType } from "../../types/task";
 
-export const AddTasks = ({
-  setState,
-  api,
-}: {
-  setState: React.Dispatch<React.SetStateAction<boolean>>;
+interface IAddTaskForm {
+  setData: SetDataType;
   api: APIClass;
-}) => {
+}
+
+export const AddTasks = ({ setData, api }: IAddTaskForm) => {
   const [title, setTitle] = useState("");
 
   const handleSubmit = async (e: React.SubmitEvent<HTMLFormElement>) => {
     e.preventDefault();
-    await api.addTask(title);
-    await setTitle("");
-    setState((s) => !s);
+    await api
+      .addTask(title)
+      .then((res) => res.json())
+      .then((data) => setData((s) => [...s, data]));
+    setTitle("");
   };
 
   return (
@@ -29,8 +31,6 @@ export const AddTasks = ({
         onChange={(e) => setTitle(e.target.value)}
       />
       <button type="submit">Add</button>
-      {/* <div className="task-form-core"> */}
-      {/* </div> */}
     </form>
   );
 };

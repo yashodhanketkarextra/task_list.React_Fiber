@@ -2,15 +2,15 @@ import { useEffect, useState } from "react";
 import "./App.css";
 import { APIClass } from "./api";
 import type { ITask } from "./types/task";
-import { AddTasks } from "./components/add";
-import { ShowTasks } from "./components/show";
+import { AddTasks } from "./components/task/add";
+import { ShowTasks } from "./components/task/show";
+import { Header } from "./components/header";
+import { Footer } from "./components/footer";
 
 const api = new APIClass();
 
 function App() {
   const [data, setData] = useState<ITask[]>([]);
-  const [state, setState] = useState(true);
-  const year = new Date().getFullYear();
 
   useEffect(() => {
     (async () => {
@@ -19,19 +19,17 @@ function App() {
         .then((d) => setData(d))
         .catch((e) => console.error(e));
     })();
-  }, [state]);
-
-  console.log(data);
+  }, []);
 
   return (
     <div id="container">
-      <header id="header">Task List</header>
+      <Header />
       <main id="main">
         <h1>Task List</h1>
-        <AddTasks setState={setState} api={api} />
-        <ShowTasks data={data} api={api} setState={setState} />
+        <AddTasks setData={setData} api={api} />
+        <ShowTasks setData={setData} data={data} api={api} />
       </main>
-      <footer id="footer">&copy; {year} Yashodhan Ketkar</footer>
+      <Footer />
     </div>
   );
 }
